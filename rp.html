@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Student Rewards Dashboard</title>
     
   <style>
-    
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
       font-family: "Poppins", "Segoe UI", Arial, sans-serif;
       background: radial-gradient(circle at top, #2b1055, #12001a);
-      margin: 0;
-      padding: 40px 20px;
+      padding: clamp(20px, 5vw, 40px);
       min-height: 100vh;
       color: #eae6ff;
     }
@@ -22,13 +23,14 @@
     .container {
       max-width: 1200px;
       margin: auto;
+      width: 100%;
     }
 
     .header {
       background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(16px);
-      padding: 35px;
-      border-radius: 22px;
+      padding: clamp(20px, 4vw, 35px);
+      border-radius: clamp(16px, 3vw, 22px);
       text-align: center;
       box-shadow:
         0 0 35px rgba(180, 90, 255, 0.45),
@@ -46,28 +48,30 @@
     }
 
     .header h1 {
-      margin: 0;
-      font-size: 32px;
-      letter-spacing: 1px;
+      font-size: clamp(20px, 5vw, 32px);
+      letter-spacing: clamp(0.5px, 0.2vw, 1px);
       color: #f0e9ff;
       text-shadow:
         0 0 8px rgba(200, 120, 255, 0.8),
         0 0 18px rgba(200, 120, 255, 0.6);
+      word-wrap: break-word;
     }
 
-    
     .search-box {
-      margin-top: 25px;
+      margin-top: clamp(15px, 3vw, 25px);
       display: flex;
       justify-content: center;
+      align-items: stretch;
       gap: 12px;
       flex-wrap: wrap;
     }
 
     .search-box input {
-      padding: 14px 16px;
-      width: 300px;
-      font-size: 16px;
+      padding: clamp(12px, 2vw, 14px) clamp(14px, 2.5vw, 16px);
+      width: 100%;
+      max-width: 300px;
+      min-width: 200px;
+      font-size: clamp(14px, 2vw, 16px);
       border-radius: 14px;
       border: 1px solid rgba(200, 150, 255, 0.5);
       background: rgba(0, 0, 0, 0.45);
@@ -83,8 +87,8 @@
     }
 
     .search-box button {
-      padding: 14px 30px;
-      font-size: 16px;
+      padding: clamp(12px, 2vw, 14px) clamp(20px, 4vw, 30px);
+      font-size: clamp(14px, 2vw, 16px);
       border-radius: 16px;
       border: none;
       cursor: pointer;
@@ -96,6 +100,7 @@
         0 0 20px rgba(190, 100, 255, 0.9),
         inset 0 0 10px rgba(255, 255, 255, 0.2);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      white-space: nowrap;
     }
 
     .search-box button:hover {
@@ -105,20 +110,23 @@
         inset 0 0 14px rgba(255, 255, 255, 0.3);
     }
 
- 
+    .search-box button:active {
+      transform: translateY(-1px) scale(1.02);
+    }
+
     .status {
-      margin-top: 18px;
+      margin-top: clamp(12px, 2vw, 18px);
       font-weight: 500;
+      font-size: clamp(13px, 2vw, 16px);
       color: #d8caff;
       min-height: 22px;
       text-shadow: 0 0 6px rgba(180, 90, 255, 0.6);
     }
 
-   
     .dashboard {
-      margin-top: 35px;
+      margin-top: clamp(25px, 4vw, 35px);
       display: grid;
-      gap: 25px;
+      gap: clamp(15px, 3vw, 25px);
       animation: slideUp 0.5s ease-out;
     }
 
@@ -136,8 +144,8 @@
     .dash-section {
       background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(18px);
-      padding: 30px;
-      border-radius: 24px;
+      padding: clamp(20px, 4vw, 30px);
+      border-radius: clamp(16px, 3vw, 24px);
       box-shadow:
         0 0 35px rgba(190, 110, 255, 0.55),
         inset 0 0 22px rgba(190, 110, 255, 0.25);
@@ -151,71 +159,71 @@
         inset 0 0 30px rgba(220, 150, 255, 0.35);
     }
 
-
     .student-header {
       text-align: center;
-      padding: 40px;
+      padding: clamp(25px, 5vw, 40px);
       background: linear-gradient(135deg, rgba(170, 90, 255, 0.25), rgba(90, 30, 180, 0.25));
     }
 
     .student-header h2 {
-      margin: 0 0 15px 0;
-      font-size: 42px;
+      margin: 0 0 clamp(10px, 2vw, 15px) 0;
+      font-size: clamp(24px, 6vw, 42px);
       color: #f5efff;
       text-shadow: 0 0 15px rgba(200, 120, 255, 0.8);
+      word-wrap: break-word;
     }
 
     .badge {
       display: inline-block;
-      padding: 10px 25px;
+      padding: clamp(8px, 1.5vw, 10px) clamp(18px, 3vw, 25px);
       background: rgba(156, 39, 255, 0.4);
       border-radius: 25px;
-      font-size: 18px;
+      font-size: clamp(14px, 2.5vw, 18px);
       font-weight: 600;
       box-shadow: 0 0 20px rgba(190, 100, 255, 0.6);
     }
 
     .dash-row {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+      gap: clamp(15px, 3vw, 25px);
     }
 
     .section-icon {
-      font-size: 48px;
-      margin-bottom: 15px;
+      font-size: clamp(32px, 6vw, 48px);
+      margin-bottom: clamp(10px, 2vw, 15px);
     }
 
     .section-label {
-      font-size: 14px;
+      font-size: clamp(11px, 2vw, 14px);
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: clamp(1px, 0.3vw, 2px);
       color: #d2c2ff;
-      margin-bottom: 10px;
+      margin-bottom: clamp(8px, 1.5vw, 10px);
       opacity: 0.85;
     }
 
     .section-value {
-      font-size: 28px;
+      font-size: clamp(20px, 4vw, 28px);
       font-weight: 700;
       color: #f5efff;
       text-shadow: 0 0 10px rgba(200, 120, 255, 0.6);
+      word-wrap: break-word;
     }
 
     .section-value.large {
-      font-size: 48px;
+      font-size: clamp(32px, 7vw, 48px);
     }
 
-   
     .points-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+      gap: clamp(15px, 3vw, 25px);
     }
 
     .points-card {
       text-align: center;
-      padding: 40px 30px;
+      padding: clamp(25px, 5vw, 40px) clamp(20px, 4vw, 30px);
     }
 
     .total-points {
@@ -239,29 +247,57 @@
         inset 0 0 22px rgba(100, 150, 255, 0.25);
     }
 
-   
-    @media (max-width: 768px) {
-      .dash-row,
+    /* Mobile-specific adjustments */
+    @media (max-width: 640px) {
+      .search-box {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-box input,
+      .search-box button {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .dash-section:hover {
+        transform: translateY(-3px);
+      }
+    }
+
+    /* Tablet adjustments */
+    @media (min-width: 641px) and (max-width: 1024px) {
       .points-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       }
+    }
 
-      .student-header h2 {
-        font-size: 32px;
-      }
-
-      .section-value.large {
-        font-size: 36px;
+    /* Desktop enhancements */
+    @media (min-width: 1025px) {
+      .points-grid {
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
     .footer {
       text-align: center;
-      margin-top: 45px;
-      font-size: 12px;
+      margin-top: clamp(30px, 5vw, 45px);
+      font-size: clamp(10px, 1.5vw, 12px);
       color: #cbbaff;
       opacity: 0.85;
       text-shadow: 0 0 6px rgba(180, 90, 255, 0.6);
+      padding: 0 10px;
+    }
+
+    /* Accessibility improvements */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
@@ -367,6 +403,15 @@
       </div>
     `;
   }
+
+  // Allow search on Enter key
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('query').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        search();
+      }
+    });
+  });
 </script>
 
 </body>
