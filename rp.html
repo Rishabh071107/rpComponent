@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Student Rewards Dashboard</title>
+    
+  <style>
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+      background: radial-gradient(circle at top, #2b1055, #12001a);
+      margin: 0;
+      padding: 40px 20px;
+      min-height: 100vh;
+      color: #eae6ff;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .header {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(16px);
+      padding: 35px;
+      border-radius: 22px;
+      text-align: center;
+      box-shadow:
+        0 0 35px rgba(180, 90, 255, 0.45),
+        inset 0 0 25px rgba(180, 90, 255, 0.25);
+      animation: neonPulse 4s infinite alternate;
+    }
+
+    @keyframes neonPulse {
+      from {
+        box-shadow: 0 0 25px rgba(180, 90, 255, 0.35);
+      }
+      to {
+        box-shadow: 0 0 50px rgba(200, 120, 255, 0.75);
+      }
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 1px;
+      color: #f0e9ff;
+      text-shadow:
+        0 0 8px rgba(200, 120, 255, 0.8),
+        0 0 18px rgba(200, 120, 255, 0.6);
+    }
+
+    
+    .search-box {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .search-box input {
+      padding: 14px 16px;
+      width: 300px;
+      font-size: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(200, 150, 255, 0.5);
+      background: rgba(0, 0, 0, 0.45);
+      color: #ffffff;
+      outline: none;
+      box-shadow:
+        inset 0 0 12px rgba(180, 90, 255, 0.45),
+        0 0 15px rgba(180, 90, 255, 0.35);
+    }
+
+    .search-box input::placeholder {
+      color: #d2c2ff;
+    }
+
+    .search-box button {
+      padding: 14px 30px;
+      font-size: 16px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, #9c27ff, #5a00e0);
+      color: white;
+      font-weight: bold;
+      letter-spacing: 0.6px;
+      box-shadow:
+        0 0 20px rgba(190, 100, 255, 0.9),
+        inset 0 0 10px rgba(255, 255, 255, 0.2);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search-box button:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow:
+        0 0 35px rgba(220, 150, 255, 1),
+        inset 0 0 14px rgba(255, 255, 255, 0.3);
+    }
+
+ 
+    .status {
+      margin-top: 18px;
+      font-weight: 500;
+      color: #d8caff;
+      min-height: 22px;
+      text-shadow: 0 0 6px rgba(180, 90, 255, 0.6);
+    }
+
+   
+    .dashboard {
+      margin-top: 35px;
+      display: grid;
+      gap: 25px;
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .dash-section {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(18px);
+      padding: 30px;
+      border-radius: 24px;
+      box-shadow:
+        0 0 35px rgba(190, 110, 255, 0.55),
+        inset 0 0 22px rgba(190, 110, 255, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .dash-section:hover {
+      transform: translateY(-5px);
+      box-shadow:
+        0 0 45px rgba(220, 150, 255, 0.75),
+        inset 0 0 30px rgba(220, 150, 255, 0.35);
+    }
+
+
+    .student-header {
+      text-align: center;
+      padding: 40px;
+      background: linear-gradient(135deg, rgba(170, 90, 255, 0.25), rgba(90, 30, 180, 0.25));
+    }
+
+    .student-header h2 {
+      margin: 0 0 15px 0;
+      font-size: 42px;
+      color: #f5efff;
+      text-shadow: 0 0 15px rgba(200, 120, 255, 0.8);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 25px;
+      background: rgba(156, 39, 255, 0.4);
+      border-radius: 25px;
+      font-size: 18px;
+      font-weight: 600;
+      box-shadow: 0 0 20px rgba(190, 100, 255, 0.6);
+    }
+
+    .dash-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .section-icon {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .section-label {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #d2c2ff;
+      margin-bottom: 10px;
+      opacity: 0.85;
+    }
+
+    .section-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f5efff;
+      text-shadow: 0 0 10px rgba(200, 120, 255, 0.6);
+    }
+
+    .section-value.large {
+      font-size: 48px;
+    }
+
+   
+    .points-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .points-card {
+      text-align: center;
+      padding: 40px 30px;
+    }
+
+    .total-points {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 140, 0, 0.2));
+      box-shadow:
+        0 0 35px rgba(255, 200, 0, 0.45),
+        inset 0 0 22px rgba(255, 200, 0, 0.25);
+    }
+
+    .redeemed-points {
+      background: linear-gradient(135deg, rgba(147, 51, 234, 0.2), rgba(109, 40, 217, 0.2));
+      box-shadow:
+        0 0 35px rgba(170, 90, 255, 0.45),
+        inset 0 0 22px rgba(170, 90, 255, 0.25);
+    }
+
+    .balance-points {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(29, 78, 216, 0.2));
+      box-shadow:
+        0 0 35px rgba(100, 150, 255, 0.45),
+        inset 0 0 22px rgba(100, 150, 255, 0.25);
+    }
+
+   
+    @media (max-width: 768px) {
+      .dash-row,
+      .points-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .student-header h2 {
+        font-size: 32px;
+      }
+
+      .section-value.large {
+        font-size: 36px;
+      }
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 45px;
+      font-size: 12px;
+      color: #cbbaff;
+      opacity: 0.85;
+      text-shadow: 0 0 6px rgba(180, 90, 255, 0.6);
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>🎓 Student Rewards Dashboard</h1>
+
+    <div class="search-box">
+      <input id="query" placeholder="Enter Roll No or Student Name" />
+      <button onclick="search()">SEARCH</button>
+    </div>
+
+    <div id="status" class="status">
+      Enter a roll number or name and click Search
+    </div>
+  </div>
+
+  <div id="result"></div>
+
+  <div class="footer">
+    Powered by Google Apps Script API • Neon Edition
+  </div>
+</div>
+
+<script>
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbz3Um9Q0HYUtUhDYYdrAzw0tJYNkQ1Gn1dLgKl6ZYSqW5n3NCINOv2rIDOZLOxXmAvC/exec";
+
+  function search() {
+    const q = document.getElementById("query").value.trim();
+    const status = document.getElementById("status");
+    const resultDiv = document.getElementById("result");
+
+    resultDiv.innerHTML = "";
+    status.innerText = "";
+
+    if (!q) {
+      status.innerText = "Please enter a roll number or name";
+      return;
+    }
+
+    status.innerText = "Searching...";
+
+    fetch(API_URL + "?q=" + encodeURIComponent(q))
+      .then(res => res.json())
+      .then(data => {
+        if (!data.success || !data.found) {
+          status.innerText = "No student found";
+          return;
+        }
+        status.innerText = "";
+        displayStudent(data.data);
+      })
+      .catch(() => {
+        status.innerText = "Error fetching data";
+      });
+  }
+
+  function displayStudent(s) {
+    document.getElementById("result").innerHTML = `
+      <div class="dashboard">
+        <!-- Student Info Header -->
+        <div class="dash-section student-header">
+          <h2>${s.name}</h2>
+          <div class="badge">${s.rollNo}</div>
+        </div>
+
+        <!-- Department & Mentor Row -->
+        <div class="dash-row">
+          <div class="dash-section">
+            <div class="section-icon">🏛️</div>
+            <div class="section-label">Department</div>
+            <div class="section-value">${s.department}</div>
+          </div>
+          <div class="dash-section">
+            <div class="section-icon">👨‍🏫</div>
+            <div class="section-label">Mentor</div>
+            <div class="section-value">${s.mentor}</div>
+          </div>
+        </div>
+
+        <!-- Points Grid -->
+        <div class="points-grid">
+          <div class="dash-section points-card total-points">
+            <div class="section-icon">⭐</div>
+            <div class="section-label">Total Points</div>
+            <div class="section-value large">${s.total}</div>
+          </div>
+          <div class="dash-section points-card redeemed-points">
+            <div class="section-icon">🎁</div>
+            <div class="section-label">Redeemed</div>
+            <div class="section-value large">${s.redeemed}</div>
+          </div>
+          <div class="dash-section points-card balance-points">
+            <div class="section-icon">💎</div>
+            <div class="section-label">Balance</div>
+            <div class="section-value large">${s.balance}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+</script>
+
+</body>
+</html>
